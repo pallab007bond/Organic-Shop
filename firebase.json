@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/Organic-Shop",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
