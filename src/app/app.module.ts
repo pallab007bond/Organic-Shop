@@ -1,6 +1,7 @@
 import { AdminAuthGuard } from './admin-auth-guard.service';
 import { UserService } from './user.service';
 import { AuthGuard } from './auth-guard.service';
+import {FormsModule} from '@angular/forms';
 import { AuthService } from './auth.service';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
@@ -22,6 +23,9 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { CategoryService } from './category.service';
+import { ProductService } from './product.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,10 +38,12 @@ import { LoginComponent } from './login/login.component';
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    LoginComponent
+    LoginComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
@@ -54,6 +60,7 @@ import { LoginComponent } from './login/login.component';
       {path:'my/orders',component:MyOrdersComponent, canActivate:[AuthGuard]},
 
       {path:'admin/products', component:AdminProductsComponent, canActivate:[AuthGuard , AdminAuthGuard]},
+      {path:'admin/products/new', component:ProductFormComponent, canActivate:[AuthGuard , AdminAuthGuard]},
       {path:'admin/orders', component:AdminOrdersComponent, canActivate:[AuthGuard , AdminAuthGuard]}
       
     ])
@@ -62,7 +69,9 @@ import { LoginComponent } from './login/login.component';
     AuthService,
     AuthGuard,
     UserService,
-    AdminAuthGuard
+    AdminAuthGuard,
+    CategoryService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })
