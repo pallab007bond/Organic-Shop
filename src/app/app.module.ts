@@ -2,13 +2,15 @@ import { AdminAuthGuard } from './admin-auth-guard.service';
 import { UserService } from './user.service';
 import { AuthGuard } from './auth-guard.service';
 import {FormsModule} from '@angular/forms';
+import { DataTableModule } from 'angular5-data-table';
+import {CustomFormsModule} from 'ng2-validation';
 import { AuthService } from './auth.service';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import {AngularFireDatabaseModule} from '@angular/fire/database'
+import {AngularFireDatabaseModule} from '@angular/fire/database';
 import { AppRoutingModule } from './app-routing.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
@@ -45,24 +47,27 @@ import { ProductService } from './product.service';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    DataTableModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    CustomFormsModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([
-      {path:'', component:HomeComponent},
-      {path:'products', component:ProductsComponent},
-      {path:'shopping-cart', component:ShoppingCartComponent},
-      {path:'login', component:LoginComponent},
+      {path: '', component: HomeComponent},
+      {path: 'products', component: ProductsComponent},
+      {path: 'shopping-cart', component: ShoppingCartComponent},
+      {path: 'login', component: LoginComponent},
 
-      {path:'check-out', component:CheckOutComponent, canActivate:[AuthGuard]},
-      {path:'order-success', component:OrderSuccessComponent, canActivate:[AuthGuard]},
-      {path:'my/orders',component:MyOrdersComponent, canActivate:[AuthGuard]},
+      {path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard]},
+      {path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard]},
+      {path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard]},
 
-      {path:'admin/products', component:AdminProductsComponent, canActivate:[AuthGuard , AdminAuthGuard]},
-      {path:'admin/products/new', component:ProductFormComponent, canActivate:[AuthGuard , AdminAuthGuard]},
-      {path:'admin/orders', component:AdminOrdersComponent, canActivate:[AuthGuard , AdminAuthGuard]}
-      
+      {path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuard , AdminAuthGuard]},
+      {path: 'admin/products/:id', component: ProductFormComponent, canActivate: [AuthGuard , AdminAuthGuard]},
+      {path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard , AdminAuthGuard]},
+      {path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard , AdminAuthGuard]}
+
     ])
   ],
   providers: [
