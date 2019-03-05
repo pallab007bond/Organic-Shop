@@ -30,7 +30,6 @@ export class ShoppingCartService {
     if (cartId) {return cartId; }
       const result = await this.create();
         localStorage.setItem('cartId', result.key);
-        return result.Key;
   }
   async addToCart(product: Product) {
     this.updateProductQuantity(product, 1);
